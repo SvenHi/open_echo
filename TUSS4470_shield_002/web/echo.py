@@ -37,7 +37,7 @@ class Reader(ABC):
         for byte in payload:
             calc_checksum ^= byte
         if calc_checksum != checksum[0]:
-            log.warning("⚠️ Checksum mismatch")
+            log.warning("Checksum mismatch")
             # raise ValueError("Checksum mismatch")
 
         # Unpack payload
@@ -138,7 +138,7 @@ class UDPReader(Reader):
             local_addr=(self.host, self.port),
         )
         self._transport = transport
-        log.info(f"📡 UDP listener bound to {self.host}:{self.port}")
+        log.info(f"UDP listener bound to {self.host}:{self.port}")
 
     async def close(self):
         if self._transport:
@@ -197,12 +197,12 @@ class EchoReader:
                 }
                 await self.data_callback(data)
             except Exception as e:
-                log.error(f"❌ Error sending data: {e}", exc_info=e)
+                log.error(f"Error sending data: {e}", exc_info=e)
 
             try:
                 self.depth_callback(depth)
             except Exception as e:
-                log.error(f"❌ Error sending depth: {e}", exc_info=e)
+                log.error(f"Error sending depth: {e}", exc_info=e)
 
         await asyncio.sleep(0.1)  # Allow time for other tasks
 
@@ -223,7 +223,7 @@ class EchoReader:
                 while not self._restart_event.is_set():
                     await self.aread_echo(reader)
             except Exception as e:
-                log.error(f"❌ Error in EchoReader: {e}", exc_info=e)
+                log.error(f"Error in EchoReader: {e}", exc_info=e)
             finally:
                 await reader.close()
 

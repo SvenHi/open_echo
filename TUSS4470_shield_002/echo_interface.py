@@ -149,7 +149,7 @@ class SerialReader(QThread):
                             values, depth, temperature, drive_voltage
                         )
         except serial.SerialException as e:
-            print(f"❌ Serial Error: {e}")
+            print(f"Serial Error: {e}")
 
     def stop(self):
         self.running = False
@@ -179,7 +179,7 @@ class UDPReader(QThread):
             self._sock = _socket.socket(_socket.AF_INET, _socket.SOCK_DGRAM)
             self._sock.settimeout(self.timeout)
             self._sock.bind((self.host, self.port))
-            print(f"📡 UDP listener bound to {self.host}:{self.port}")
+            print(f"UDP listener bound to {self.host}:{self.port}")
             RECV_SIZE = PACKET_SIZE  # we only need at least a packet, can be tuned
             packet_buf = bytearray()
             packets_ok = 0
@@ -241,7 +241,7 @@ class UDPReader(QThread):
                 if (packets_ok + checksum_errors) and (packets_ok + checksum_errors) % 200 == 0:
                     print(f"UDP stats: ok={packets_ok} bad={checksum_errors}")
         except Exception as e:
-            print(f"❌ UDP Reader error: {e}")
+            print(f"UDP Reader error: {e}")
         finally:
             if self._sock:
                 try:
@@ -625,15 +625,15 @@ class WaterfallApp(QMainWindow):
             self.udp_thread = UDPReader(port=udp_port)
             self.udp_thread.data_received.connect(self.waterfall_plot_callback)
             self.udp_thread.start()
-            print(f"✅ UDP listener started on port {udp_port}")
+            print(f"UDP listener started on port {udp_port}")
         except Exception as e:
-            print(f"❌ Failed to start UDP listener: {e}")
+            print(f"Failed to start UDP listener: {e}")
 
     def disconnect_udp(self):
         if hasattr(self, 'udp_thread') and self.udp_thread:
             self.udp_thread.stop()
             self.udp_thread = None
-            print("🔌 UDP listener stopped")
+            print("UDP listener stopped")
 
     def toggle_udp_connection(self):
         if hasattr(self, 'udp_thread') and self.udp_thread and self.udp_thread.isRunning():
@@ -679,11 +679,11 @@ class WaterfallApp(QMainWindow):
                 )
                 self.nmea_server_socket.bind(("0.0.0.0", port))
                 self.nmea_server_socket.listen(1)
-                print(f"📡 Waiting for TCP NMEA connection on port {port}...")
+                print(f"Waiting for TCP NMEA connection on port {port}...")
                 self.nmea_client_socket, _ = self.nmea_server_socket.accept()
-                print(f"✅ NMEA client connected on port {port}")
+                print(f"NMEA client connected on port {port}")
             except Exception as e:
-                print(f"❌ Failed to set up NMEA output: {e}")
+                print(f"Failed to set up NMEA output: {e}")
                 self.nmea_output_enabled = False
 
     def generate_dbt_sentence(self, depth_cm):
@@ -723,10 +723,10 @@ class WaterfallApp(QMainWindow):
     def keyPressEvent(self, event):
         print("key pressed")
         if event.key() == ord("Q"):
-            print("🛑 Quit triggered from keyboard.")
+            print("Quit triggered from keyboard.")
             self.close()
         elif event.key() == ord("C"):
-            print("🔌 Connect triggered from keyboard.")
+            print("Connect triggered from keyboard.")
             self.connect_button.click()
         else:
             super().keyPressEvent(event)
@@ -739,13 +739,13 @@ class WaterfallApp(QMainWindow):
         selected_port = self.serial_dropdown.currentText()
         try:
             self.serial_thread = SerialReader(selected_port, BAUD_RATE)
-            print(f"🚀 Using Serial reader on {selected_port}")
+            print(f"Using Serial reader on {selected_port}")
 
             self.serial_thread.data_received.connect(self.waterfall_plot_callback)
             self.serial_thread.start()
-            print(f"✅ Connected to {selected_port}")
+            print(f"Connected to {selected_port}")
         except Exception as e:
-            print(f"❌ Connection failed: {e}")
+            print(f"Connection failed: {e}")
 
     def toggle_serial_connection(self):
         if self.serial_thread and self.serial_thread.isRunning():
@@ -762,11 +762,11 @@ class WaterfallApp(QMainWindow):
                 self.serial_thread.stop()
                 self.serial_thread.wait()  # Ensure thread ends before continuing
                 self.serial_thread = None
-                print("🔌 Disconnected from serial device")
+                print("Disconnected from serial device")
             except Exception as e:
-                print(f"❌ Disconnection failed: {e}")
+                print(f"Disconnection failed: {e}")
         else:
-            print("⚠️ No active serial connection to disconnect")
+            print("No active serial connection to disconnect")
 
     def waterfall_plot_callback(
         self, spectrogram, depth_index, temperature, drive_voltage
@@ -823,7 +823,7 @@ class WaterfallApp(QMainWindow):
                     self._last_nmea_sent = now
 
                 except Exception as e:
-                    print(f"⚠️ NMEA send failed: {e}")
+                    print(f"NMEA send failed: {e}")
 
     def send_hex_value(self):
         hex_value = self.hex_input.text().strip()
@@ -838,9 +838,9 @@ class WaterfallApp(QMainWindow):
                         ser.write(hex_value.encode())
                         print(f"Sent: {hex_value}")
             except ValueError:
-                print("❌ Invalid hex format.")
+                print("Invalid hex format.")
         else:
-            print("❌ Invalid hex value. Please enter a valid hex string (e.g., 0x1F)")
+            print("Invalid hex value. Please enter a valid hex string (e.g., 0x1F)")
 
     def closeEvent(self, event):
         if self.serial_thread:
@@ -868,9 +868,9 @@ def set_gradient(self, gradient_name):
     try:
         self.current_gradient = gradient_name
         self.colorbar.item.gradient.loadPreset(gradient_name)
-        print(f"✅ Gradient changed to: {gradient_name}")
+        print(f"Gradient changed to: {gradient_name}")
     except Exception as e:
-        print(f"❌ Failed to apply gradient '{gradient_name}': {e}")
+        print(f"Failed to apply gradient '{gradient_name}': {e}")
 
 
 def get_current_gradient(self):
