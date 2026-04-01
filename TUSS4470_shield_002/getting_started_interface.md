@@ -19,10 +19,17 @@ The application is intended primarily as a testing and development tool, but is 
 
 ### 1. Create and activate a virtual environment
 
+For Linux/macOS:
 ```bash
 cd open_echo/TUSS4470_shield_002
 python3 -m venv venv 
 source venv/bin/activate 
+```
+For Windows:
+```bash
+cd open_echo/TUSS4470_shield_002
+python3 -m venv venv 
+venv\Scripts\activate.bat 
 ```
 
 ### 2. Install requirements
