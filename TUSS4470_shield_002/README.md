@@ -95,5 +95,9 @@ The recommended setup is illustrated below:
 Below: Comparison of a transducer wired incorrectly (left half) vs. correctly (right half).
 <img alt="Powerline noise on transducer cable shield" src="/documentation/images/powerline_noise.jpg">
 
+### Raspberry Pico W mapping
+Mapping of connections from Arduino shield to Raspberry Pico W (if used instead of Arduino Uno):
+<img alt="Pico W HW mapping" src="/documentation/images/open_echo_tuss4470_development_shield_PicoW_mapping.png">
+
 
 <b/>Next Steps: Proceed to [Getting Started with Arduino TUSS4470 Firmware](getting_started_TUSS4470_firmware.md).</b>
