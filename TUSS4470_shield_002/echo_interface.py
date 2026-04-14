@@ -28,22 +28,22 @@ from PyQt5.QtWidgets import QApplication
 
 # Serial Configuration
 BAUD_RATE = 250000
-NUM_SAMPLES = 1800 # (X-axis)
+NUM_SAMPLES = 10000 # (X-axis)
 
 MAX_ROWS = 300  # Number of time steps (Y-axis)
 Y_LABEL_DISTANCE = 50  # distance between labels in cm
 
-SPEED_OF_SOUND = 1440  # default sound speed meters/second in water
-# SPEED_OF_SOUND = 343  # default sound speed meters/second in water
+# SPEED_OF_SOUND = 1440  # default sound speed meters/second in water
+SPEED_OF_SOUND = 343  # default sound speed meters/second in air
 
 # SAMPLE_TIME = 52.226e-6  # 13.2 microseconds on Atmega328 max sample speed plus 50 microseconds delay in sampling loop
 # SAMPLE_TIME = 47.0e-6
 # SAMPLE_TIME = 41.666e-6 # 13.2 microseconds on Atmega328 max sample speed plus 40 microseconds delay in sampling loop
 # SAMPLE_TIME = 22.22e-6  # 13.2 microseconds on Atmega328 max sample speed plus 20 microseconds delay in sampling loop
-SAMPLE_TIME = 13.2e-6     # 13.2 microseconds on Atmega328 max sample speed without additional delay
+# SAMPLE_TIME = 13.2e-6     # 13.2 microseconds on Atmega328 max sample speed without additional delay
 # SAMPLE_TIME = 11.0e-6     # 13.2 microseconds on RP2040 max sample speed with 10 microseconds additional delay per sample
 # SAMPLE_TIME = 7.682e-6  # 7.682 microseconds on STM32F103 max sample speed
-# SAMPLE_TIME = 6.0e-6  # 6 microseconds on RP2040 max sample speed with 5 microseconds additional delay per sample
+SAMPLE_TIME = 6.0e-6  # 6 microseconds on RP2040 max sample speed with 5 microseconds additional delay per sample
 # SAMPLE_TIME = 1.290e-6     # 13.2 microseconds on RP2040 max sample speed without additional delay
 
 DEFAULT_LEVELS = (0, 256)  # Expected data range
